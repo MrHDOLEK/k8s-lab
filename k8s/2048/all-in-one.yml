@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: game-2048
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: game-2048
+  name: deployment-2048
+spec:
+  selector:
+    matchLabels:
+      name: app-2048
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: app-2048
+    spec:
+      containers:
+        - image: k8smaestro/2048
+          imagePullPolicy: Always
+          name: app-2048
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 220Mi
+            limits:
+              cpu: 200m
+              memory: 450Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: game-2048
+  name: service-2048
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    name: app-2048

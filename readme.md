@@ -1,7 +1,7 @@
 ### Tech Friday Commands
 
 ## Init
-1. ``gcloud container clusters get-credentials tech-friday-k8s --zone europe-central2-a --project fgp-devzoo``
+1. ``gcloud container clusters get-credentials <cluster_name> --zone europe-central2-a --project <project_id>``
 2. ``kubectl describe nodes`` - test whether it works
 
 ## Commands
